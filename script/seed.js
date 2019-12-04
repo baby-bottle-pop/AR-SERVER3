@@ -1,18 +1,78 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Review} = require('../server/db/models')
+
+const users = [
+  {
+    firstName: 'Phurba',
+    lastName: 'Sherpa',
+    email: 'phurba@email.com',
+    password: '123'
+  },
+  {
+    firstName: 'Yooni',
+    lastName: 'Park',
+    email: 'yooni@email.com',
+    password: 'abc'
+  },
+  {
+    firstName: 'Martin',
+    lastName: 'Ng',
+    email: 'martin@email.com',
+    password: '123'
+  },
+  {
+    firstName: 'Alex',
+    lastName: 'Penaloza',
+    email: 'alex@email.com',
+    password: '123'
+  }
+]
+
+const reviews = [
+  {
+    userId: 1,
+    content: 'BEST RESTAURANT EVER',
+    date: '2018/02/23',
+    ratings: 4,
+    location: 'New York, NY',
+    fourSquareId: '45'
+  },
+  {
+    userId: 2,
+    content: 'BEST RESTAURANT EVER in asian',
+    date: '2018/02/23',
+    ratings: 5,
+    location: 'New York, NY',
+    fourSquareId: '60'
+  },
+  {
+    userId: 4,
+    content: 'BEST RESTAURANT EVER IN BURGERS',
+    date: '2018/02/23',
+    ratings: 4,
+    location: 'New York, NY',
+    fourSquareId: '75'
+  }
+]
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  await Promise.all(
+    users.map(user => {
+      return User.create(user)
+    })
+  )
 
-  console.log(`seeded ${users.length} users`)
+  await Promise.all(
+    reviews.map(review => {
+      return Review.create(review)
+    })
+  )
+  console.log('Seeding success!')
   console.log(`seeded successfully`)
 }
 
