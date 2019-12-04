@@ -1,13 +1,10 @@
 const router = require('express').Router()
-const {Reviews} = require('../db/models')
+const {Review} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
     console.log('stahp')
-    const allReviews = await Reviews.findAll({
-      limit: 4,
-      order: [['createdAt', 'DESC']]
-    })
+    const allReviews = await Review.findAll()
     res.json(allReviews)
   } catch (error) {
     next(error)
@@ -17,7 +14,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const businessId = req.params.id
-    const reviews = await Reviews.findAll({
+    const reviews = await Review.findAll({
       limit: 4,
       where: {
         fourSquareId: businessId
