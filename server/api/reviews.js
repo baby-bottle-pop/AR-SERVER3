@@ -26,7 +26,6 @@ router.get('/:id', async (req, res, next) => {
     } else {
       res.json(reviews)
     }
-    // console.log('testing this route')
   } catch (error) {
     next(error)
   }
@@ -34,10 +33,9 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/:id', async (req, res, next) => {
   try {
-    console.log('leggo my eggo')
     const businessId = req.params.id
     const {content, ratings} = req.body
-    const newReview = await Reviews.create({
+    const newReview = await Review.create({
       content,
       ratings,
       fourSquareId: businessId
