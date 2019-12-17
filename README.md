@@ -6,25 +6,35 @@ AR World Backend is where users are able to create new reviews and post them ont
 
 <h3>Basic setup</h3>
 Fork the project then clone it:
+
 ```
 git clone https://github.com/yourgithubname/AR-SERVER3.git
 ```
+
 Install modules:
+
 ```
 npm install
 ```
+
 Create database in terminal:
+
 ```
 createdb ar-server
 ```
+
 Start Express Server
+
 ```
 npm start
 ```
+
 Visit the website at:
+
 ```
 https://localhost:8080
 ```
+
 <h3>Seeding</h3>
 You can seed the file by running <code>npm run seed</code>
 
